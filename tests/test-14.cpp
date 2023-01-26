@@ -3,7 +3,7 @@
 #include <PlushStore.hpp>
 
 #include <catch2/catch_test_macros.hpp>
-
+#include <iostream>
 TEST_CASE("Test 14 - "
           "Un enfant peut acheter une peluche au magasin.")
 {

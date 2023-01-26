@@ -1,5 +1,9 @@
 #pragma once
 #include <string>
+#include <optional>
+#include <Plush.hpp>
+#include <vector>
+#include <iostream>
 
 class PlushStore
 {
@@ -47,8 +51,33 @@ public:
         }
         _stock += 1;
         _experience += 1;
+        
+        _plush.push_back({invest + _experience});
         return invest + _experience;
     }
+    std::optional<Plush> buy(int money){
+        if(get_stock_size() == 0){
+            return {};
+        }
+        Plush min = _plush[0];
+        int indice = 0;
+        for (int i = 0; i < get_stock_size(); i++)
+            {   
+                if(_plush[i].get_cost() < min.get_cost()){
+                    min = _plush[i];
+                    indice = i;
+                }
+            }
+
+        if(min.get_cost() > money){
+            return {};
+        }
+        _stock -= 1;
+        _money += min.get_cost();
+        _plush.erase(_plush.begin() + indice);
+        return min;
+    }
+
     int get_experience() const
     {
         return _experience;
@@ -60,4 +89,5 @@ private:
     int _stock = 0;
     int _debt = 0;
     int _experience = 0;
+    std::vector<Plush> _plush = {}; 
 };
