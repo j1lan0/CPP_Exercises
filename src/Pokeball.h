@@ -2,28 +2,34 @@
 
 #include "Pokemon.h"
 // A ball where a Pokemon sleeps.
+#include <vector>
+#include <memory>
 class Pokeball
 {
-
-    public:
-        Pokeball()
-    {    
+public:
+    Pokeball()
+    {
     }
-        bool empty() const{
-            return _empty;
-        }
+    bool empty() const
+    {
+        return _poke == nullptr;
+    }
 
-        void store(PokemonPtr pokemon){
-            _pokemon = std::move(pokemon);
-            _empty = false;
-        }
+    void store(PokemonPtr pokemon)
+    {
+        _poke = std::move(pokemon);
+    }
 
-        const Pokemon& pokemon() const
-        {
-            return *_pokemon;
-        }
+    Pokemon &pokemon() const
+    {
+        return *_poke;
+    }
 
-    private:
-        bool _empty = true; 
-        PokemonPtr _pokemon;
+    PokemonPtr steal()
+    {
+        return std::move(_poke);
+    }
+
+private:
+    PokemonPtr _poke;
 };
