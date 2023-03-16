@@ -2,7 +2,7 @@
 #include "../src/Kitchen.hpp"
 
 #include <catch2/catch_test_macros.hpp>
-
+#include <iostream>
 TEST_CASE("Units can be registered in the Kitchen")
 {
     auto kitchen = Kitchen {};
@@ -47,7 +47,6 @@ TEST_CASE("Units are not relocated in memory when another one is added")
         // We add many units, to trigger a potential relocation of the elements.
         kitchen.register_unit(Unit { "u" + std::to_string(i) });
     }
-
     REQUIRE(first_unit.name == "test");
     REQUIRE(kitchen.find_unit("test") == &first_unit);
 }
