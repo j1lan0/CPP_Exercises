@@ -20,7 +20,7 @@ TEST_CASE("We can write and open images with their path")
     {
         Image<uint8_t, WIDTH, HEIGHT> img(foo);
         //img.save("images/lol.png");
-        lib::save(img, "images/lol.png");
+        lib::save(img, "lol.png");
         
         for (size_t j = 0; j < HEIGHT; ++j)
         {
@@ -35,7 +35,7 @@ TEST_CASE("We can write and open images with their path")
 
     std::cout << std::endl;
     {
-        Image<uint8_t, WIDTH, HEIGHT> img = lib::load<uint8_t, WIDTH, HEIGHT>("images/lol.png");
+        Image<uint8_t, WIDTH, HEIGHT> img = lib::load<uint8_t, WIDTH, HEIGHT>("lol.png");
         for (size_t j = 0; j < HEIGHT; ++j)
         {
             for (size_t i = 0; i < WIDTH; ++i)
